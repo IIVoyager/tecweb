@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guacamole</title>
+</head>
+<body>
+    <!-- 
+        h1: Se utiliza para el encabezado principal de la página.
+        Debe haber solo uno por página y representa el título más importante.
+    -->
+    <h1>Guacamole (clásico)</h1>
+
+    <!-- 
+        blockquote: Se utiliza para citas o referencias a contenido externo.
+        En este caso, se cita una descripción general sobre el guacamole.
+    -->
+    <blockquote>
+    "Existe un condimento que no puede faltar en toda mesa mexicana. Algunos
+    lo consideran una salsa, otros un aderezo, algunos incluso le llaman
+    ensalada, otros simplemente le llaman por su nombre propio: Guacamole."
+    </blockquote>
+
+    <!-- 
+        p: Elemento para párrafos de texto.
+        Se utiliza para bloques de texto que forman una unidad temática.
+    -->
+    <p>
+    Aunque el guacamole se prepara de diferentes formas según la zona de la que
+    provenga la receta, la base suele ser la misma. Aquí te mostramos una receta
+    muy completa para preparar esta conocida salsa mexicana:
+    </p>
+
+    <!-- 
+        h2: Encabezado de segundo nivel.
+        Se utiliza para secciones dentro del contenido principal.
+    -->
+    <h2>Ingredientes</h2>
+
+    <!-- 
+        ul: Lista no ordenada (con viñetas).
+        Se utiliza cuando el orden de los elementos no es importante.
+    -->
+    <ul>
+        <li>4 o 5 aguacates maduros</li>
+        <li>1 cebolla mediana (normal)</li>
+        <li>1 tomate mediano</li>
+        <li>1 chile serrano (o un jalapeño en conserva)</li>
+        <li>Zumo de 1/2 lima o limón</li>
+        <li>1 manojo de cilantro fresco</li>
+        <li>Sal</li>
+    </ul>
+    
+    <h2>Instrucciones</h2>
+
+    <!-- 
+        ol: Lista ordenada (numerada).
+        Se utiliza cuando la secuencia de los pasos es importante.
+    -->
+    <ol>
+        <li>Lavar bien el tomate y el manojo de cilantro</li>
+        <li>Pelar la cebolla y quitarle la capa exterior</li>
+        <li>Trozar la cebolla y el tomate en trozos muy pequeños</li>
+        <li>Picar las hojas de cilantro lo más fino posible, desechando los tallos</li>
+        <li>Poner todos los ingredientes en un recipiente, preferentemente un molcajete</li>
+        <li>Cortar por la mitad los aguacates, retirando el hueso</li>
+        <li>Sacar toda la pulpa posible de los aguacates y ponerla en el molcajete</li>
+        <li>Añadir el zumo de 1/2 lima con una pizca de sal</li>
+        <li>Añadir un chile serrano muy bien picadito</li>
+        <li>Machacar todos los ingredientes en el molcajete</li>
+    </ol>
+
+    <!-- 
+        p: Nuevamente usamos párrafos para información adicional
+        que no forma parte de la lista numerada de instrucciones.
+    -->
+    <p>
+    En caso de no contar con un molcajete, se puede utilizar un tenedor
+    procurando que la pulpa del aguacate se mezcle con los demás ingredientes.
+    Debe quedarnos un guacamole con los trozos visibles, pero opcionalmente
+    puede pasarse por la batidora para dejarlo más cremoso y con una textura
+    más uniforme.
+    </p>
+
+
+    
+    <!-- 
+        Contenido de 02_articulo
+    -->
+    <article>
+        <header>
+                <!-- 
+                    small: Se utiliza para representar letra pequeña como declaraciones de derechos de autor, 
+                    comentarios o información legal. En este caso, se usa para la información de publicación.
+                -->
+            <p>
+                <small>
+                    por MasterChef,
+                <!-- 
+                    time: Se utiliza para representar fechas y horas en un formato legible por máquinas.
+                    El atributo datetime permite especificar la fecha en un formato estandarizado (YYYY-MM-DD).
+                -->           
+                <time datetime="2018-11-15">
+                    November 15, 2018
+                </time></small>
+            </p>
+        </header>
+
+        <h2>Bajito y Despacito</h2>
+        
+        <p>
+            <!-- 
+                em: Se utiliza para indicar énfasis en un texto. 
+                Los navegadores normalmente lo muestran en cursiva, 
+                pero tiene un significado semántico de importancia.
+            -->
+            Esta semana estamos <em>extremadamente</em> emocionados por presentar una
+            nueva técnica de cocina llamada 
+            <!-- 
+                dfn: Se utiliza para marcar la definición de un término.
+                En este caso, se aplica a "sous vide" como término que se está definiendo.
+                
+                i: Se utiliza para marcar texto en una voz o estado de ánimo alternativo, 
+                o para indicar un término técnico. Se anida dentro de dfn para el término técnico "sous vide"
+                para indicar que es un término técnico en otro idioma.
+            -->
+            <dfn><i>sous vide</i></dfn>. Con la técnica
+            <!-- 
+                b: Se utiliza para llamar la atención sobre un texto sin indicar mayor importancia.
+                En este caso, se aplica nuevamente a "sous vide" para resaltarlo visualmente.
+            --> 
+            <b>sous vide</b>, tú sumerges un recipiente (generalmente de plástico sellado
+            al vacío) en un baño de agua que precisamente se adapta a la temperatura requerida 
+            para que la comida sea cocinada. En este programa, 
+            <!-- 
+                cite: Se utiliza para marcar el título de una obra creativa (libro, programa, película, etc.).
+                En este caso, se aplica al nombre del programa "Cocina para Geeks".
+            -->
+            <cite class="program-name">Cocina para Geeks</cite>, Jaime Potter describe la técnica como
+            <!-- 
+                q: Se utiliza para citas cortas en línea.
+                En este caso, se aplica a la descripción "poción mágica a temperatura ultra baja".
+            -->
+            <q class="magic-quote">poción mágica a temperatura ultra baja</q>.
+        </p>
+        
+        <p>
+            La siguiente semana, prepararemos <b>Salmon Sous Vide con Eneldo
+            Holandés</b>. Para asistir al programa, contáctanos antes del 30 de
+            Noviembre.
+        </p>
+        
+        <p>
+            <!-- 
+                br: Se utiliza para producir un salto de línea en el texto.
+                Es útil cuando los formatos de dirección requieren saltos de línea.
+            -->
+            registro@masterchef.com<br>
+            552-336-1800
+        </p>
+
+         <!-- 
+            small: Se utiliza para representar letra pequeña como declaraciones de derechos de autor, 
+            comentarios o información legal.
+         -->
+        <p><small><b>Advertencia:</b> El salmón cocinado a la Sous vide no está
+        pasteurizado. Evítalo se está embarazada o se tiene problemas de
+        alergia e inmunidad.</small></p>
+    </article>
+</body>
+</html>

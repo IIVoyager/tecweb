@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Práctica 3</title>
+    <title>Práctica 5</title>
 </head>
 <body>
     <h2>Ejercicio 1</h2>
@@ -29,6 +29,45 @@
         echo '<li>$_element1 es válida porque inicia con guión bajo.</li>';
         echo '<li>$house*5 es inválida porque el símbolo * no está permitido.</li>';
         echo '</ul>';
+    ?>
+
+    <h2>Ejercicio 2</h2>
+    <p>Proporcionar los valores de $a, $b, $c como sigue:</p>
+    <p>$a = “ManejadorSQL” <br> $b = 'MySQL’ <br>$c = &$a</p>
+
+    <?php
+        $a = "ManejadorSQL";
+        $b = 'MySQL';
+        $c = &$a;
+    ?>
+
+    <p><b> a. Muestra el contenido de cada variable </b></p>
+     <?php
+        echo '<h4>Respuesta:</h4>';   
+        echo "<p>\$a = $a <br> \$b = $b <br> \$c = $c</p>";
+    ?>
+
+    <p><b>b. Agrega al código actual las siguientes asignaciones: </b></p>
+    <p>$a = “PHP server” <br>$b = &$a</p>
+    <?php
+        $a = "PHP server";
+        $b = &$a;
+    ?>
+
+    <p><b>c. Vuelve a mostrar el contenido de cada uno</b></p>
+    <?php
+        echo '<h4>Respuesta:</h4>';
+        echo "<p>\$a = $a <br> \$b = $b <br> \$c = $c</p>";
+    ?>
+
+    <p><b>d. Describe qué ocurrió en el segundo bloque de asignaciones</b></p>
+    <?php
+        echo '<h4>Respuesta:</h4>';
+        echo "<p>En el segundo bloque de asignaciones, la variable \$a fue reasignada al valor 'PHP server'. 
+        Dado que a la variable \$b se le cambia su valor para hacer referencia a la variable \$a, 
+        ahora refleja el nuevo valor de \$a. 
+        La variable, \$c sigue siendo una referencia a \$a (desde la asignación anterior \$c = &\$a) y dado
+        que \$a cambió de valor, \$c también muestra 'PHP server'.</p>";
     ?>
 </body>
 </html>

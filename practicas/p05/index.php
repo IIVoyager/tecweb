@@ -110,5 +110,21 @@
         print_r($z);
         echo " (tipo: " . gettype($z) . ")</p>";
     ?>
+
+    <h2>Ejercicio 4</h2>
+    <p>Lee y muestra los valores de las variables del ejercicio anterior, pero ahora con la ayuda de
+       la matriz $GLOBALS o del modificador global de PHP.</p>
+    <?php
+        echo '<h4>Respuesta:</h4>';
+        echo "<p>Usando \$GLOBALS:</p>";
+        echo "<ul>";
+        echo "<li>\$GLOBALS['a'] = " . $GLOBALS['a'] . "</li>";
+        echo "<li>\$GLOBALS['b'] = " . $GLOBALS['b'] . "</li>";
+        echo "<li>\$GLOBALS['c'] = " . $GLOBALS['c'] . "</li>";
+        echo "<li>\$GLOBALS['z'] = ";
+        print_r($GLOBALS['z']);
+        echo "</li>";
+        echo "</ul>";
+    ?>
 </body>
 </html>

@@ -69,5 +69,46 @@
         La variable, \$c sigue siendo una referencia a \$a (desde la asignación anterior \$c = &\$a) y dado
         que \$a cambió de valor, \$c también muestra 'PHP server'.</p>";
     ?>
+
+    <h2>Ejercicio 3</h2>
+    <p>Muestra el contenido de cada variable inmediatamente después de cada asignación verificando la evolución 
+        del tipo de estas variables (imprime todos los componentes de los arreglos):</p>
+    <p>$a = “PHP5” <br>$z[] = &$a <br>$b = “5a version de PHP” <br>$c = $b*10 <br>$a .= $b <br>$b *= $c<br> $z[0] = “MySQL”</p>
+    <?php
+        echo '<h4>Respuesta:</h4>';
+        
+        $a = "PHP5";
+        echo "<p><i>Al asignar \$a = \"PHP5\": </i><br>";
+        echo "\$a = $a (tipo: " . gettype($a) . ")</p>";
+        
+        $z[] = &$a;
+        echo "<p><i>Al asignar \$z[] = &\$a:</i><br>";
+        echo "\$z = ";
+        print_r($z);
+        echo " (tipo: " . gettype($z) . ")</p>";
+        
+        $b = "5a version de PHP";
+        echo "<p><i>Al asignar \$b = \"5a version de PHP\":</i><br>"; echo "\$b = $b (tipo: " . gettype($b) . ")</p>";
+        
+        $b = (int)$b; // Convertir a entero para evitar warning en la siguiente operación
+        $c = $b*10;
+        echo "<p><i>Al asignar \$c = \$b * 10:</i><br>";
+        echo "\$c = $c (tipo: " . gettype($c) . ")</p>";
+        
+        $a .= $b;
+        echo "<p><i>Al asignar \$a .= \$b:</i><br>";
+        echo "\$a = $a (tipo: " . gettype($a) . ")</p>";
+        
+        $b *= $c;
+        echo "<p>Al asignar \$b *= \$c:</i><br>";
+        echo "\$b = $b (tipo: " . gettype($b) . ")</p>";
+        
+        $z[0] = "MySQL";
+        echo "<p><i>Al asignar \$z[0] = \"MySQL\":</i><br>";
+        echo "\$a = $a (tipo: " . gettype($a) . ")<br>";
+        echo "\$z = ";
+        print_r($z);
+        echo " (tipo: " . gettype($z) . ")</p>";
+    ?>
 </body>
 </html>

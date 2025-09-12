@@ -142,6 +142,45 @@
         
         echo '<h4>Respuesta:</h4>';
         echo "<p>\$a = $a <br> \$b = $b <br> \$c = $c</p>";
+
+        unset($a, $b, $c); // Limpiar variables para evitar conflictos en el siguiente ejercicio
+    ?>
+
+    <h2>Ejercicio 6</h2>
+    <p>Dar y comprobar el valor booleano de las variables $a, $b, $c, $d, $e y $f y muéstralas usando 
+        la función var_dump(<datos>). <br> Después investiga una función de PHP que permita transformar el valor booleano de $c y $e
+        en uno que se pueda mostrar con un echo:</p>    
+    <?php
+        $a = "0";
+        $b = "TRUE";
+        $c = FALSE;
+        $d = ($a OR $b);
+        $e = ($a AND $c);
+        $f = ($a XOR $b);
+        
+        echo '<h4>Respuesta:</h4>';
+        echo "<p>Valores booleanos con var_dump():</p>";
+        echo "<ul>";
+        echo "<li>\$a = \"0\": "; var_dump($a); echo "</li>";
+        echo "<li>\$b = \"TRUE\": "; var_dump($b); echo "</li>";
+        echo "<li>\$c = FALSE: "; var_dump($c);"</li>";
+        echo "<li>\$d = (\$a OR \$b): "; var_dump($d); echo "</li>";
+        echo "<li>\$e = (\$a AND \$c): "; var_dump($e); "</li>";
+        echo "<li>\$f = (\$a XOR \$b): "; var_dump($f); echo "</li>";
+        echo "</ul>";
+        
+        echo "<p>Transformando valores booleanos para mostrar con echo:</p>";
+        echo "<ul>";
+        echo "<li>\$c (FALSE) con intval(): " . intval($c) . "</li>";
+        echo "<li>\$c (FALSE) con var_export(): " . var_export($c, true) . "</li>";
+        echo "<li>\$e (FALSE) con intval(): " . intval($e) . "</li>";
+        echo "<li>\$e (FALSE) con var_export(): " . var_export($e, true) . "</li>";
+        echo "</ul>";
+        echo "<p>1. <b>intval(\$booleano)</b> convierte: TRUE → 1, FALSE → 0 <br>
+              2. <b>var_export(\$booleano, true)</b> devuelve representación string del valor booleano.
+              El segundo parámetro true hace que devuelva el string en lugar de imprimirlo</p>";
+
+        unset($a, $b, $c, $d, $e, $f); // Limpiar variables para evitar conflictos en el siguiente ejercicio
     ?>
 </body>
 </html>

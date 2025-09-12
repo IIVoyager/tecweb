@@ -68,6 +68,8 @@
         ahora refleja el nuevo valor de \$a. 
         La variable, \$c sigue siendo una referencia a \$a (desde la asignación anterior \$c = &\$a) y dado
         que \$a cambió de valor, \$c también muestra 'PHP server'.</p>";
+
+        unset($a, $b, $c); // Limpiar variables para evitar conflictos en el siguiente ejercicio
     ?>
 
     <h2>Ejercicio 3</h2>
@@ -109,6 +111,8 @@
         echo "\$z = ";
         print_r($z);
         echo " (tipo: " . gettype($z) . ")</p>";
+        
+        unset($a, $b, $c, $z); // Limpiar variables para evitar conflictos en el siguiente ejercicio
     ?>
 
     <h2>Ejercicio 4</h2>
@@ -125,6 +129,19 @@
         print_r($GLOBALS['z']);
         echo "</li>";
         echo "</ul>";
+    ?>
+
+    <h2>Ejercicio 5</h2>
+    <p>Dar el valor de las variables $a, $b, $c al final del siguiente script:</p>
+    <p>$a = “7 personas” <br> $b = (integer) $a <br> $a = “9E3” <br> $c = (double) $a</p>
+    <?php
+        $a = "7 personas";
+        $b = (integer) $a;
+        $a = "9E3";
+        $c = (double) $a;
+        
+        echo '<h4>Respuesta:</h4>';
+        echo "<p>\$a = $a <br> \$b = $b <br> \$c = $c</p>";
     ?>
 </body>
 </html>

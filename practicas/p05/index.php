@@ -182,5 +182,24 @@
 
         unset($a, $b, $c, $d, $e, $f); // Limpiar variables para evitar conflictos en el siguiente ejercicio
     ?>
+
+    <h2>Ejercicio 7</h2>
+    <p>Usando la variable predefinida $_SERVER, determina lo siguiente:
+         <ul>
+              <li>Versión de Apache</li>
+              <li>Versión de PHP</li>
+              <li>Nombre del sistema operativo (Servidor)</li>
+              <li>Idioma del navegador (Cliente)</li>
+         </ul>
+    </p>
+    <?php
+        echo '<h4>Respuesta:</h4>';
+        echo "<ul>";
+        echo "<li>Versión de Apache: " . ($_SERVER['SERVER_SOFTWARE'] ?? 'No disponible') . "</li>";
+        echo "<li>Versión de PHP: " . phpversion() . "</li>";
+        echo "<li>Sistema operativo del servidor: " . php_uname('s') . "</li>";
+        echo "<li>Idioma del navegador (cliente): " . ($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'No disponible') . "</li>";
+        echo "</ul>";
+    ?>
 </body>
 </html>

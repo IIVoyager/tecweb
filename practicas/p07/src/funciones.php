@@ -293,4 +293,236 @@ function validarEdadSexo($edad, $sexo) {
         ];
     }
 }
+
+
+/**
+ * Ejercicio 6: Función para crear el arreglo del parque vehicular
+ * @return array Arreglo asociativo con los datos de 15 vehículos
+ */
+function crearParqueVehicular() {
+    return [
+        'UBN6338' => [
+            'Auto' => [
+                'marca' => 'HONDA',
+                'modelo' => 2020,
+                'tipo' => 'camioneta'
+            ],
+            'Propietario' => [
+                'nombre' => 'Alfonzo Esparza',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'C.U., Jardines de San Manuel'
+            ]
+        ],
+        'ABC1234' => [
+            'Auto' => [
+                'marca' => 'TOYOTA',
+                'modelo' => 2022,
+                'tipo' => 'sedan'
+            ],
+            'Propietario' => [
+                'nombre' => 'María González',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Centro Histórico 123'
+            ]
+        ],
+        'XYZ5678' => [
+            'Auto' => [
+                'marca' => 'NISSAN',
+                'modelo' => 2019,
+                'tipo' => 'hachback'
+            ],
+            'Propietario' => [
+                'nombre' => 'Carlos Rodríguez',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Av. Juárez 456'
+            ]
+        ],
+        'DEF9012' => [
+            'Auto' => [
+                'marca' => 'VOLKSWAGEN',
+                'modelo' => 2021,
+                'tipo' => 'sedan'
+            ],
+            'Propietario' => [
+                'nombre' => 'Ana Martínez',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Col. La Paz 789'
+            ]
+        ],
+        'GHI3456' => [
+            'Auto' => [
+                'marca' => 'FORD',
+                'modelo' => 2018,
+                'tipo' => 'camioneta'
+            ],
+            'Propietario' => [
+                'nombre' => 'Roberto Sánchez',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Blvd. 5 de Mayo 321'
+            ]
+        ],
+        'JKL7890' => [
+            'Auto' => [
+                'marca' => 'CHEVROLET',
+                'modelo' => 2023,
+                'tipo' => 'hachback'
+            ],
+            'Propietario' => [
+                'nombre' => 'Laura Hernández',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Zona Dorada 654'
+            ]
+        ],
+        'MNO2345' => [
+            'Auto' => [
+                'marca' => 'HYUNDAI',
+                'modelo' => 2020,
+                'tipo' => 'sedan'
+            ],
+            'Propietario' => [
+                'nombre' => 'Miguel Torres',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Residencial San Jorge 987'
+            ]
+        ],
+        'PQR6789' => [
+            'Auto' => [
+                'marca' => 'KIA',
+                'modelo' => 2021,
+                'tipo' => 'camioneta'
+            ],
+            'Propietario' => [
+                'nombre' => 'Sofía Ramírez',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Fracc. Las Ánimas 147'
+            ]
+        ],
+        'STU0123' => [
+            'Auto' => [
+                'marca' => 'MAZDA',
+                'modelo' => 2019,
+                'tipo' => 'sedan'
+            ],
+            'Propietario' => [
+                'nombre' => 'Javier López',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Av. Reforma 258'
+            ]
+        ],
+        'VWX4567' => [
+            'Auto' => [
+                'marca' => 'SUBARU',
+                'modelo' => 2022,
+                'tipo' => 'camioneta'
+            ],
+            'Propietario' => [
+                'nombre' => 'Elena Castro',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Col. El Carmen 369'
+            ]
+        ],
+        'YZA8901' => [
+            'Auto' => [
+                'marca' => 'BMW',
+                'modelo' => 2023,
+                'tipo' => 'sedan'
+            ],
+            'Propietario' => [
+                'nombre' => 'Diego Morales',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Privada de los Pinos 753'
+            ]
+        ],
+        'BCD2345' => [
+            'Auto' => [
+                'marca' => 'AUDI',
+                'modelo' => 2021,
+                'tipo' => 'hachback'
+            ],
+            'Propietario' => [
+                'nombre' => 'Patricia Reyes',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Calle 5 de Febrero 159'
+            ]
+        ],
+        'EFG6789' => [
+            'Auto' => [
+                'marca' => 'MERCEDES-BENZ',
+                'modelo' => 2020,
+                'tipo' => 'sedan'
+            ],
+            'Propietario' => [
+                'nombre' => 'Ricardo Ortega',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Av. 14 Sur 486'
+            ]
+        ],
+        'HIJ0123' => [
+            'Auto' => [
+                'marca' => 'VOLVO',
+                'modelo' => 2022,
+                'tipo' => 'camioneta'
+            ],
+            'Propietario' => [
+                'nombre' => 'Carmen Vargas',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Blvd. Atlixco 642'
+            ]
+        ],
+        'KLM4567' => [
+            'Auto' => [
+                'marca' => 'RENAULT',
+                'modelo' => 2019,
+                'tipo' => 'hachback'
+            ],
+            'Propietario' => [
+                'nombre' => 'Fernando Mendoza',
+                'ciudad' => 'Puebla, Pue.',
+                'direccion' => 'Col. Amalucan 825'
+            ]
+        ]
+    ];
+}
+
+
+/**
+ * Ejercicio 6: Función para buscar vehículo por matrícula
+*/
+function buscarPorMatricula($matricula, $parqueVehicular) {
+    $matricula = strtoupper(trim($matricula));
+    
+    if (array_key_exists($matricula, $parqueVehicular)) {
+        return [
+            'matricula' => $matricula,
+            'datos' => $parqueVehicular[$matricula],
+            'encontrado' => true
+        ];
+    }
+    
+    return [
+        'matricula' => $matricula,
+        'datos' => null,
+        'encontrado' => false
+    ];
+}
+
+    // Obtener datos del formulario via POST
+    $tipoConsulta = isset($_POST['tipo_consulta']) ? $_POST['tipo_consulta'] : 'todos';
+    $matricula = isset($_POST['matricula']) ? $_POST['matricula'] : '';
+
+    // Validar que se hayan enviado los datos
+    if ($tipoConsulta === 'por_matricula' && empty($matricula)) {
+        header('Location: ejercicio6_formulario.html');
+        exit();
+    }
+
+    // Crear el parque vehicular
+    $parqueVehicular = crearParqueVehicular();
+
+    // Procesar la consulta
+    if ($tipoConsulta === 'por_matricula') {
+        $resultado = buscarPorMatricula($matricula, $parqueVehicular);
+    } else {
+        $resultado = ['todos' => true];
+    }
 ?>

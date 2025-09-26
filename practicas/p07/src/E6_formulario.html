@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #4CAF50;
+            margin-top: 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .btn-todos {
+            background-color: #2196F3;
+        }
+        .btn-todos:hover {
+            background-color: #1976D2;
+        }
+        .info {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .volver {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .volver a {
+            color: #2196F3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .volver a:hover {
+            text-decoration: underline;
+        }
+        .ejemplos {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .format-info {
+            font-family: monospace;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 3px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ejercicio 6 - Consulta del Parque Vehicular</h1>
+        
+        <div class="info">
+            <h3>Vehículos registrados:</h3>
+            <ul>
+                <li><strong>15 vehículos</strong> registrados en código duro</li>
+                <li>Formato de matrícula: <strong>LLLNNNN</strong> (3 letras + 4 números)</li>
+                <li>Estructura: Matrícula → Auto → Propietario</li>
+                <li>Consulta individual o general de todos los vehículos</li>
+            </ul>
+        </div>
+        
+        <!-- Formulario 1: Búsqueda por matrícula -->
+        <div class="form-group">
+            <h2>🔍 Búsqueda por Matrícula</h2>
+            <p>Ingresa una matrícula para consultar un vehículo específico:</p>
+            
+            <form action="E6_respuesta.php" method="POST">
+                <input type="hidden" name="tipo_consulta" value="por_matricula">
+                <label for="matricula">Matrícula del vehículo:</label>
+                <input type="text" id="matricula" name="matricula" 
+                       pattern="[A-Za-z]{3}[0-9]{4}" 
+                       title="Formato: 3 letras seguidas de 4 números (ej: ABC1234)"
+                       placeholder="Ej: UBN6338" required
+                       maxlength="7">
+                <button type="submit">Buscar Vehículo</button>
+            </form>
+            
+            <div class="format-info">
+                <strong>Formato requerido:</strong> LLLNNNN (3 letras + 4 números)<br>
+                <strong>Ejemplos válidos:</strong> ABC1234, XYZ5678, UBN6338
+            </div>
+        </div>
+        
+        <!-- Formulario 2: Consulta de todos los vehículos -->
+        <div class="form-group">
+            <h2>📋 Consulta General</h2>
+            <p>Ver todos los vehículos registrados en el parque vehicular:</p>
+            
+            <form action="E6_respuesta.php" method="POST">
+                <input type="hidden" name="tipo_consulta" value="todos">
+                <button type="submit" class="btn-todos">Ver Todos los Vehículos</button>
+            </form>
+        </div>
+        
+        <div class="ejemplos">
+            <h3>Matrículas disponibles para prueba:</h3>
+            <ul>
+                <li><strong>UBN6338</strong> - HONDA 2020 (camioneta)</li>
+                <li><strong>ABC1234</strong> - TOYOTA 2022 (sedan)</li>
+                <li><strong>XYZ5678</strong> - NISSAN 2019 (hachback)</li>
+                <li><strong>DEF9012</strong> - VOLKSWAGEN 2021 (sedan)</li>
+                <li>... y 11 vehículos más registrados</li>
+            </ul>
+        </div>
+        
+        <div class="volver">
+            <a href="..\index.php">← Volver al menú principal</a>
+        </div>
+    </div>
+</body>
+</html>

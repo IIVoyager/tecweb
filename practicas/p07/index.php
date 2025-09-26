@@ -354,5 +354,42 @@
             </ul>
         </div>
     </div>
+
+
+    <!-- Ejercicio 6: Parque Vehicular -->
+    <div class="ejercicio ejercicio6" style="background-color: #e8f5e8; margin: 30px 0; padding: 20px; border: 2px solid #ddd; border-radius: 10px;">
+        <h2>Ejercicio 6: Parque Vehicular</h2>
+        <p>Sistema de consulta de vehículos registrados en la ciudad.</p>
+        
+        <div class="info">
+            <h3>Características implementadas:</h3>
+            <ul>
+                <li><strong>Formulario HTML5</strong> simple (documento .html)</li>
+                <li><strong>Arreglo asociativo</strong> con 15 vehículos en código duro</li>
+                <li><strong>Estructura anidada:</strong> Matrícula → Auto → Propietario</li>
+                <li><strong>Procesamiento PHP</strong> con método POST</li>
+                <li><strong>Respuesta XHTML</strong> generada dinámicamente</li>
+                <li>Uso de <strong>print_r</strong> para mostrar estructura</li>
+                <li>Consultas por matrícula individual o general</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <a href="src/E6_formulario.html" style="display: inline-block; padding: 12px 24px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                Ir al Ejercicio 6 →
+            </a>
+        </div>
+            
+        <h3>Flujo del ejercicio:</h3>
+            <ol>
+                <li>Usuario accede a <strong>E6_formulario.html</strong> (HTML5 puro)</li>
+                <li>Selecciona consulta individual o general y envía via <strong>POST</strong></li>
+                <li>Datos son procesados por <strong>E6_respuesta.php</strong></li>
+                <li>PHP genera documento <strong>XHTML</strong> con los resultados</li>
+                <li>Se muestra información específica o tabla general</li>
+                <li>Se incluye estructura <strong>print_r</strong> del arreglo</li>
+            </ol>
+        </div>
+    </div>
 </body>
 </html>

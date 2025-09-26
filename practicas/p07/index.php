@@ -8,6 +8,17 @@
     $iteraciones = $resultadoSecuencia['iteraciones'];
     $totalNumeros = $resultadoSecuencia['totalNumeros'];
     $ultimaSecuencia = $resultadoSecuencia['ultimaSecuencia'];
+
+    // Procesar ejercicio 3 si se proporciona un múltiplo
+    $resultadoWhile = null;
+    $resultadoDoWhile = null;
+    $multiplo = null;
+
+    if (isset($_GET['multiplo']) && $_GET['multiplo'] !== '') {
+        $multiplo = (int)$_GET['multiplo'];
+        $resultadoWhile = encontrarMultiploConWhile($multiplo);
+        $resultadoDoWhile = encontrarMultiploConDoWhile($multiplo);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -39,11 +50,22 @@
         .ejercicio2 {
             background-color: #f0f8ff;
         }
+         .ejercicio3 {
+            background-color: #ffffffff;
+        }
         .resultado {
             background-color: #f0f0f0;
             padding: 10px;
             margin: 10px 0;
             border-left: 4px solid #333;
+        }
+        .resultado-exito {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        .resultado-error {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
         }
         form {
             margin: 20px 0;
@@ -51,9 +73,10 @@
             background-color: #f9f9f9;
             border: 1px solid #ddd;
         }
-        input[type="text"] {
+        input[type="text"], input[type="number"] {
             padding: 8px;
             width: 200px;
+            margin: 5px;
         }
         button {
             padding: 8px 15px;
@@ -61,9 +84,16 @@
             color: white;
             border: none;
             cursor: pointer;
+            margin: 5px;
         }
         button:hover {
             background-color: #45a049;
+        }
+        .resumen {
+            background-color: #fff3cdff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
         }
         .explicacion {
             margin-top: 20px;
@@ -71,11 +101,28 @@
             background-color: #e7f3ff;
         }
         .estadisticas {
-            background-color: #fff3cd;
+            background-color: #fff3cdff;
             padding: 15px;
             margin: 15px 0;
             border-radius: 5px;
             font-size: 1.1em;
+        }
+        .comparativa {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .ciclo {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .ciclo-while {
+            background-color: #e8f5e8;
+        }
+        .ciclo-dowhile {
+            background-color: #e3f2fd;
         }
         table {
             width: 100%;
@@ -92,6 +139,15 @@
         .patron-cumplido {
             background-color: #d4edda;
             font-weight: bold;
+        }
+        .numeros-lista {
+            max-height: 150px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 1.3em;
         }
     </style>
 </head>
@@ -151,6 +207,93 @@
             <input type="hidden" name="numero" value="<?php echo isset($_GET['numero']) ? $_GET['numero'] : ''; ?>">
             <button type="submit">Generar nueva secuencia</button>
         </form>
+    </div>
+
+
+    <!-- Ejercicio 3: Encontrar múltiplo usando WHILE y DO-WHILE -->
+    <div class="ejercicio ejercicio3">
+        <h2>Ejercicio 3: Encontrar múltiplo con ciclos WHILE y DO-WHILE</h2>
+        <p>Encontrar el primer número aleatorio que sea múltiplo de un número dado</p>
+        
+        <form method="GET" action="">
+            <label for="multiplo">Ingresa el múltiplo a buscar:</label>
+            <input type="number" name="multiplo" id="multiplo" min="1" max="1000" 
+                   placeholder="Ej: 7" value="<?php echo isset($_GET['multiplo']) ? htmlspecialchars($_GET['multiplo']) : ''; ?>" required>
+            <button type="submit">Buscar múltiplo</button>
+            <button type="button" onclick="location.href='index.php'">Limpiar</button>
+        </form>
+        
+        <?php if ($multiplo !== null): ?>
+            <div class="estadisticas">
+                <h3>Buscando múltiplo de: <?php echo $multiplo; ?></h3>
+                <p>Números generados entre 1 y 1000</p>
+            </div>
+            
+            <div class="comparativa">
+                <!-- Ciclo WHILE -->
+                <div class="ciclo ciclo-while">
+                    <h3>Usando ciclo WHILE</h3>
+                    <?php if ($resultadoWhile['error']): ?>
+                        <div class="resultado resultado-error">
+                            <strong>Error:</strong> <?php echo $resultadoWhile['error']; ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="resultado resultado-exito">
+                            <strong>¡Encontrado!</strong> El número <?php echo $resultadoWhile['numero']; ?> es múltiplo de <?php echo $multiplo; ?>
+                        </div>
+                        <p><strong>Intentos realizados:</strong> <?php echo $resultadoWhile['intentos']; ?></p>
+                        <p><strong>Números generados:</strong> <?php echo count($resultadoWhile['numerosGenerados']); ?></p>
+                        
+                        <div class="numeros-lista">
+                            <strong>Lista de números generados:</strong><br>
+                            <?php 
+                            $numeros = array_slice($resultadoWhile['numerosGenerados'], 0, 50);
+                            echo implode(', ', $numeros);
+                            if (count($resultadoWhile['numerosGenerados']) > 50) {
+                                echo '... (' . (count($resultadoWhile['numerosGenerados']) - 50) . ' más)';
+                            }
+                            ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                
+                <!-- Ciclo DO-WHILE -->
+                <div class="ciclo ciclo-dowhile">
+                    <h3>Usando ciclo DO-WHILE</h3>
+                    <?php if ($resultadoDoWhile['error']): ?>
+                        <div class="resultado resultado-error">
+                            <strong>Error:</strong> <?php echo $resultadoDoWhile['error']; ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="resultado resultado-exito">
+                            <strong>¡Encontrado!</strong> El número <?php echo $resultadoDoWhile['numero']; ?> es múltiplo de <?php echo $multiplo; ?>
+                        </div>
+                        <p><strong>Intentos realizados:</strong> <?php echo $resultadoDoWhile['intentos']; ?></p>
+                        <p><strong>Números generados:</strong> <?php echo count($resultadoDoWhile['numerosGenerados']); ?></p>
+                        
+                        <div class="numeros-lista">
+                            <strong>Lista de números generados:</strong><br>
+                            <?php 
+                            $numeros = array_slice($resultadoDoWhile['numerosGenerados'], 0, 50);
+                            echo implode(', ', $numeros);
+                            if (count($resultadoDoWhile['numerosGenerados']) > 50) {
+                                echo '... (' . (count($resultadoDoWhile['numerosGenerados']) - 50) . ' más)';
+                            }
+                            ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            
+            <div class="resumen">
+                <h3>Diferencia entre WHILE y DO-WHILE:</h3>
+                <ul>
+                    <li><strong>WHILE:</strong> Primero verifica la condición, luego ejecuta el código</li>
+                    <li><strong>DO-WHILE:</strong> Primero ejecuta el código, luego verifica la condición</li>
+                    <li>El DO-WHILE siempre se ejecuta al menos una vez</li>
+                </ul>
+            </div>
+        <?php endif; ?>
     </div>
 </body>
 </html>

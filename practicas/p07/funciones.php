@@ -102,4 +102,107 @@ function mostrarMatriz($matriz) {
     $html .= '</table>';
     return $html;
 }
+
+
+/**
+ * Ejercicio 3: Función para encontrar múltiplo usando ciclo WHILE
+ * @param int $multiplo El múltiplo a buscar
+ * @return array Resultados del proceso
+ */
+function encontrarMultiploConWhile($multiplo) {
+    $intentos = 0;
+    $numerosGenerados = [];
+    $numeroEncontrado = null;
+    
+    // Validar que el múltiplo sea válido
+    if ($multiplo <= 0) {
+        return [
+            'encontrado' => false,
+            'numero' => null,
+            'intentos' => 0,
+            'numerosGenerados' => [],
+            'error' => 'El múltiplo debe ser un número positivo mayor que 0'
+        ];
+    }
+    
+    while ($numeroEncontrado === null) {
+        $intentos++;
+        $numeroAleatorio = rand(1, 1000); // Generar número entre 1 y 1000
+        $numerosGenerados[] = $numeroAleatorio;
+        
+        if ($numeroAleatorio % $multiplo == 0) {
+            $numeroEncontrado = $numeroAleatorio;
+        }
+        
+        // Límite de seguridad para evitar bucles infinitos
+        if ($intentos > 10000) {
+            return [
+                'encontrado' => false,
+                'numero' => null,
+                'intentos' => $intentos,
+                'numerosGenerados' => $numerosGenerados,
+                'error' => 'Límite de intentos alcanzado (10,000)'
+            ];
+        }
+    }
+    
+    return [
+        'encontrado' => true,
+        'numero' => $numeroEncontrado,
+        'intentos' => $intentos,
+        'numerosGenerados' => $numerosGenerados,
+        'error' => null
+    ];
+}
+
+/**
+ * Ejercicio 3: Función para encontrar múltiplo usando ciclo DO-WHILE
+ * @param int $multiplo El múltiplo a buscar
+ * @return array Resultados del proceso
+ */
+function encontrarMultiploConDoWhile($multiplo) {
+    $intentos = 0;
+    $numerosGenerados = [];
+    $numeroEncontrado = null;
+    
+    // Validar que el múltiplo sea válido
+    if ($multiplo <= 0) {
+        return [
+            'encontrado' => false,
+            'numero' => null,
+            'intentos' => 0,
+            'numerosGenerados' => [],
+            'error' => 'El múltiplo debe ser un número positivo mayor que 0'
+        ];
+    }
+    
+    do {
+        $intentos++;
+        $numeroAleatorio = rand(1, 1000); // Generar número entre 1 y 1000
+        $numerosGenerados[] = $numeroAleatorio;
+        
+        if ($numeroAleatorio % $multiplo == 0) {
+            $numeroEncontrado = $numeroAleatorio;
+        }
+        
+        // Límite de seguridad para evitar bucles infinitos
+        if ($intentos > 10000) {
+            return [
+                'encontrado' => false,
+                'numero' => null,
+                'intentos' => $intentos,
+                'numerosGenerados' => $numerosGenerados,
+                'error' => 'Límite de intentos alcanzado (10,000)'
+            ];
+        }
+    } while ($numeroEncontrado === null);
+    
+    return [
+        'encontrado' => true,
+        'numero' => $numeroEncontrado,
+        'intentos' => $intentos,
+        'numerosGenerados' => $numerosGenerados,
+        'error' => null
+    ];
+}
 ?>

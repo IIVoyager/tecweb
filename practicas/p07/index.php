@@ -4,8 +4,10 @@
 
     // Generar la secuencia cuando se carga la página
     $resultadoSecuencia = generarSecuenciaImparParImpar();
-    $secuencias = $resultadoSecuencia['secuencias'];
-    $totalIntentos = $resultadoSecuencia['totalIntentos'];
+    $matriz = $resultadoSecuencia['matriz'];
+    $iteraciones = $resultadoSecuencia['iteraciones'];
+    $totalNumeros = $resultadoSecuencia['totalNumeros'];
+    $ultimaSecuencia = $resultadoSecuencia['ultimaSecuencia'];
 ?>
 
 <!DOCTYPE html>
@@ -63,30 +65,33 @@
         button:hover {
             background-color: #45a049;
         }
-        .secuencia {
-            margin: 5px 0;
-            padding: 8px;
-            font-family: monospace;
-        }
-        .secuencia-cumple {
-            background-color: #d4edda;
-            border-left: 4px solid #28a745;
-            font-weight: bold;
-        }
-        .secuencia-no-cumple {
-            background-color: #f8d7da;
-            border-left: 4px solid #dc3545;
-        }
-        .resumen {
-            background-color: #e7f3ff;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-        }
         .explicacion {
             margin-top: 20px;
             padding: 15px;
             background-color: #e7f3ff;
+        }
+        .estadisticas {
+            background-color: #fff3cd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+        table {
+            width: 100%;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+        }
+        td {
+            padding: 8px;
+        }
+        .patron-cumplido {
+            background-color: #d4edda;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -128,32 +133,19 @@
         <h2>Ejercicio 2: Generar secuencia impar, par, impar</h2>
         <p>Generar números aleatorios de 3 dígitos hasta obtener una secuencia que cumpla: IMPAR, PAR, IMPAR</p>
         
-        <div class="resumen">
-            <h3>Resumen:</h3>
-            <p>Se generaron <strong><?php echo $totalIntentos; ?> intentos</strong> hasta encontrar la secuencia deseada.</p>
-            <p>La secuencia final encontrada: 
-                <strong><?php echo $secuencias[count($secuencias)-1]['numeros'][0]; ?>, 
-                <?php echo $secuencias[count($secuencias)-1]['numeros'][1]; ?>, 
-                <?php echo $secuencias[count($secuencias)-1]['numeros'][2]; ?></strong>
+        <div class="estadisticas">
+            <h3>Estadísticas:</h3>
+            <p><strong><?php echo $totalNumeros; ?> números</strong> obtenidos en <strong><?php echo $iteraciones; ?> iteraciones</strong></p>
+            <p><strong>Dimensión de la matriz:</strong> <?php echo count($matriz); ?> filas × 3 columnas</p>
+            <p><strong>Secuencia final encontrada:</strong> 
+                <?php echo $ultimaSecuencia[0]; ?> (<?php echo esParOImpar($ultimaSecuencia[0]); ?>), 
+                <?php echo $ultimaSecuencia[1]; ?> (<?php echo esParOImpar($ultimaSecuencia[1]); ?>), 
+                <?php echo $ultimaSecuencia[2]; ?> (<?php echo esParOImpar($ultimaSecuencia[2]); ?>)
             </p>
         </div>
         
-        <h3>Secuencias generadas:</h3>
-        <?php
-        foreach ($secuencias as $secuencia) {
-            $clase = $secuencia['cumplePatron'] ? 'secuencia-cumple' : 'secuencia-no-cumple';
-            echo '<div class="secuencia ' . $clase . '">';
-            echo '<strong>Intento ' . $secuencia['intento'] . ':</strong> ';
-            echo $secuencia['numeros'][0] . ' (' . esParOImpar($secuencia['numeros'][0]) . '), ';
-            echo $secuencia['numeros'][1] . ' (' . esParOImpar($secuencia['numeros'][1]) . '), ';
-            echo $secuencia['numeros'][2] . ' (' . esParOImpar($secuencia['numeros'][2]) . ')';
-            
-            if ($secuencia['cumplePatron']) {
-                echo ' <strong>✓ PATRÓN ENCONTRADO</strong>';
-            }
-            echo '</div>';
-        }
-        ?>
+        <h3>Matriz de secuencias generadas (<?php echo count($matriz); ?>×3):</h3>
+        <?php echo mostrarMatriz($matriz); ?>
         
         <form method="GET" action="">
             <input type="hidden" name="numero" value="<?php echo isset($_GET['numero']) ? $_GET['numero'] : ''; ?>">

@@ -339,7 +339,7 @@
         </div>
         
         <div style="text-align: center; margin: 20px 0;">
-            <a href="src/E5_formulario.php" style="display: inline-block; padding: 12px 24px; background-color: #FF9800; 
+            <a href="src/E5_formulario.html" style="display: inline-block; padding: 12px 24px; background-color: #FF9800; 
                                             color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
                 Ir al Ejercicio 5 →
             </a>

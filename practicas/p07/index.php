@@ -1,6 +1,6 @@
 <?php
     // Incluir el archivo de funciones
-    include 'funciones.php';
+    include 'src/funciones.php';
 
     // Generar la secuencia cuando se carga la página
     $resultadoSecuencia = generarSecuenciaImparParImpar();
@@ -317,6 +317,41 @@
         <h3>Tabla de letras minúsculas del alfabeto:</h3>
         <div class="tabla-ascii">
             <?php echo generarTablaAscii($arregloAscii); ?>
+        </div>
+    </div>
+
+
+    <!-- Ejercicio 5: Validación de Edad y Sexo -->
+    <div class="ejercicio ejercicio5" style="background-color: #fff8e1; margin: 30px 0; padding: 20px; 
+                                                border: 2px solid #ddd; border-radius: 10px;">
+        <h2>Ejercicio 5: Validación de Edad y Sexo</h2>
+        <p>Validar si una persona es de sexo femenino y tiene entre 18 y 35 años.</p>
+        
+        <div class="info">
+            <h3>Características:</h3>
+            <ul>
+                <li>Formulario HTML5 con validación</li>
+                <li>Uso del método POST</li>
+                <li>Variables superglobales $_POST</li>
+                <li>Estructura if para validación</li>
+                <li>Respuesta en XHTML generado por PHP</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <a href="src/E5_formulario.php" style="display: inline-block; padding: 12px 24px; background-color: #FF9800; 
+                                            color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                Ir al Ejercicio 5 →
+            </a>
+        </div>
+        
+        <div class="ejemplos">
+            <h3>Ejemplos de prueba:</h3>
+            <ul>
+                <li><strong>Válido:</strong> Femenino, 25 años → "¡Bienvenida!"</li>
+                <li><strong>Inválido:</strong> Masculino, 30 años → "Sexo incorrecto"</li>
+                <li><strong>Inválido:</strong> Femenino, 40 años → "Edad fuera de rango"</li>
+            </ul>
         </div>
     </div>
 </body>

@@ -248,4 +248,49 @@ function generarTablaAscii($arreglo) {
     $html .= '</table>';
     return $html;
 }
+
+
+/**
+ * Ejercicio 5: Función para validar edad y sexo (Ejercicio 5)
+ * @param int $edad La edad de la persona
+ * @param string $sexo El sexo de la persona (femenino/masculino)
+ * @return array Resultado de la validación con mensaje
+ */
+function validarEdadSexo($edad, $sexo) {
+    // Validaciones básicas
+    if (!is_numeric($edad) || $edad < 0 || $edad > 150) {
+        return [
+            'valido' => false,
+            'mensaje' => 'Error: La edad debe ser un número válido entre 0 y 150 años.'
+        ];
+    }
+    
+    $edad = (int)$edad;
+    $sexo = strtolower(trim($sexo));
+    
+    // Verificar condiciones: sexo femenino y edad entre 18-35
+    if ($sexo === 'femenino' && $edad >= 18 && $edad <= 35) {
+        return [
+            'valido' => true,
+            'mensaje' => '¡Bienvenida! Usted está en el rango de edad permitido.'
+        ];
+    } else {
+        $mensaje = 'Lo sentimos, no cumple con los requisitos. ';
+        
+        if ($sexo !== 'femenino') {
+            $mensaje .= 'El acceso está permitido solo para sexo femenino. ';
+        }
+        
+        if ($edad < 18) {
+            $mensaje .= 'Debe ser mayor de 18 años. ';
+        } elseif ($edad > 35) {
+            $mensaje .= 'La edad máxima permitida es 35 años. ';
+        }
+        
+        return [
+            'valido' => false,
+            'mensaje' => $mensaje
+        ];
+    }
+}
 ?>

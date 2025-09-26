@@ -205,4 +205,47 @@ function encontrarMultiploConDoWhile($multiplo) {
         'error' => null
     ];
 }
+
+
+/**
+ * Ejercicio 4: Función para crear arreglo ASCII de letras minúsculas
+ * @return array Arreglo con índices 97-122 y valores a-z
+ */
+function crearArregloAscii() {
+    $arreglo = [];
+    
+    // Crear arreglo con ciclo for (97 a 122)
+    for ($i = 97; $i <= 122; $i++) {
+        $arreglo[$i] = chr($i);
+    }
+    
+    return $arreglo;
+}
+
+/**
+ * Ejercicio 4: Función para generar tabla HTML del arreglo ASCII
+ * @param array $arreglo Arreglo ASCII a mostrar
+ * @return string HTML de la tabla formateada
+ */
+function generarTablaAscii($arreglo) {
+    $html = '<table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; margin: 10px 0; width: 100%;">';
+    $html .= '<tr><th>Código ASCII</th><th>Carácter</th><th>Letra</th></tr>';
+    
+    $contador = 0;
+    foreach ($arreglo as $codigo => $letra) {
+        // Alternar colores de fondo para mejor legibilidad
+        $fondo = ($contador % 2 == 0) ? 'background-color: #f9f9f9;' : 'background-color: #ffffff;';
+        
+        $html .= '<tr style="' . $fondo . '">';
+        $html .= '<td style="text-align: center; font-weight: bold;">' . $codigo . '</td>';
+        $html .= '<td style="text-align: center; font-family: monospace; font-size: 1.2em;">' . chr($codigo) . '</td>';
+        $html .= '<td style="text-align: center; font-size: 1.2em; font-weight: bold;">' . strtoupper($letra) . ' (' . $letra . ')</td>';
+        $html .= '</tr>';
+        
+        $contador++;
+    }
+    
+    $html .= '</table>';
+    return $html;
+}
 ?>

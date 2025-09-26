@@ -19,6 +19,9 @@
         $resultadoWhile = encontrarMultiploConWhile($multiplo);
         $resultadoDoWhile = encontrarMultiploConDoWhile($multiplo);
     }
+
+    // Crear arreglo ASCII para ejercicio 4 (siempre se ejecuta)
+    $arregloAscii = crearArregloAscii();
 ?>
 
 <!DOCTYPE html>
@@ -52,6 +55,9 @@
         }
          .ejercicio3 {
             background-color: #ffffffff;
+        }
+        .ejercicio4 {
+            background-color: #f0fff0;
         }
         .resultado {
             background-color: #f0f0f0;
@@ -148,6 +154,12 @@
             border-radius: 5px;
             font-family: monospace;
             font-size: 1.3em;
+        }
+        .tabla-ascii {
+            margin: 20px 0;
+        }
+        .tabla-ascii th {
+            background-color: #2196F3;
         }
     </style>
 </head>
@@ -294,6 +306,18 @@
                 </ul>
             </div>
         <?php endif; ?>
+    </div>
+
+
+    <!-- Ejercicio 4: Arreglo ASCII -->
+    <div class="ejercicio ejercicio4">
+        <h2>Ejercicio 4: Arreglo ASCII - Letras minúsculas</h2>
+        <p>Arreglo con índices del 97 al 122 y valores de la 'a' a la 'z' usando la función chr()</p>
+        
+        <h3>Tabla de letras minúsculas del alfabeto:</h3>
+        <div class="tabla-ascii">
+            <?php echo generarTablaAscii($arregloAscii); ?>
+        </div>
     </div>
 </body>
 </html>

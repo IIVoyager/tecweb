@@ -218,7 +218,7 @@
             <a href="../index.php" class="btn btn-principal">Index</a>
         </div>    
         
-         <p>
+        <p>
             <a href="https://validator.w3.org/check?uri=referer"><img
             src="https://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="36" width="93" /></a>
         </p>

@@ -1,12 +1,19 @@
 <?php
     // Incluir el archivo de funciones
     include 'funciones.php';
+
+    // Variables auxiliares para clases dinámicas
+    $claseResultado = '';
+    if (isset($tipoConsulta) && $tipoConsulta === 'por_matricula') {
+        $claseResultado = isset($resultado['encontrado']) && $resultado['encontrado'] ? 'exito' : 'error';
+    }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Resultado - Consulta Parque Vehicular</title>
     <style type="text/css">
@@ -18,13 +25,13 @@
             background-color: #f5f5f5;
         }
         .container {
-            background-color: white;
+            background-color: #ffffff;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         h1 {
-            color: #333;
+            color: #333333;
             text-align: center;
             margin-bottom: 30px;
         }
@@ -60,13 +67,13 @@
         }
         th {
             background-color: #4CAF50;
-            color: white;
+            color: #ffffff;
             padding: 12px;
             text-align: left;
         }
         td {
             padding: 10px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #dddddd;
         }
         tr:nth-child(even) {
             background-color: #f9f9f9;
@@ -85,15 +92,15 @@
         }
         .btn-volver {
             background-color: #6c757d;
-            color: white;
+            color: #ffffff;
         }
         .btn-nuevo {
             background-color: #28a745;
-            color: white;
+            color: #ffffff;
         }
         .btn-principal {
             background-color: #007bff;
-            color: white;
+            color: #ffffff;
         }
         .detalles {
             display: grid;
@@ -119,74 +126,77 @@
 </head>
 <body>
     <div class="container">
-        <h1>Resultado - Consulta del Parque Vehicular</h1>        
-        
+        <h1>Resultado - Consulta del Parque Vehicular</h1>            
         <?php if ($tipoConsulta === 'por_matricula'): ?>
-            <!-- Resultado de búsqueda por matrícula -->
-            <div class="resultado <?php echo $resultado['encontrado'] ? 'exito' : 'error'; ?>">
+            
+            <!-- Resultado de búsqueda por matrícula -->    
                 <h2>
-                    <?php echo $resultado['encontrado'] ? '✓ Vehículo Encontrado' : '✗ Vehículo No Encontrado'; ?>
+                    <?php echo $resultado['encontrado'] ? '&#10003; Vehículo Encontrado' : '&#10007; Vehículo No Encontrado'; ?>
                 </h2>
-                <p><strong>Matrícula buscada:</strong> <?php echo htmlspecialchars($matricula); ?></p>
+                <p><strong>Matrícula buscada:</strong> <?php echo htmlspecialchars($matricula, ENT_QUOTES, 'UTF-8'); ?></p>
                 
                 <?php if ($resultado['encontrado']): ?>
-                    <p>Se encontró el vehículo con la matrícula <strong><?php echo htmlspecialchars($resultado['matricula']); ?></strong></p>
+                    <p>Se encontró el vehículo con la matrícula <strong><?php echo htmlspecialchars($resultado['matricula'], ENT_QUOTES, 'UTF-8'); ?></strong></p>
                 <?php else: ?>
-                    <p>No se encontró ningún vehículo con la matrícula <strong><?php echo htmlspecialchars($resultado['matricula']); ?></strong></p>
+                    <p>No se encontró ningún vehículo con la matrícula <strong><?php echo htmlspecialchars($resultado['matricula'], ENT_QUOTES, 'UTF-8'); ?></strong></p>
                 <?php endif; ?>
-            </div>
+    </div>
             
             <?php if ($resultado['encontrado']): ?>
                 <div class="info-vehiculo">
                     <h2>Información del Vehículo</h2>
                     <div class="detalles">
                         <div class="seccion">
-                            <h3>📊 Datos del Auto</h3>
-                            <p><strong>Matrícula:</strong> <?php echo $resultado['matricula']; ?></p>
-                            <p><strong>Marca:</strong> <?php echo $resultado['datos']['Auto']['marca']; ?></p>
-                            <p><strong>Modelo:</strong> <?php echo $resultado['datos']['Auto']['modelo']; ?></p>
-                            <p><strong>Tipo:</strong> <?php echo ucfirst($resultado['datos']['Auto']['tipo']); ?></p>
+                            <h3>Datos del Auto</h3>
+                            <p><strong>Matrícula:</strong> <?php echo htmlspecialchars($resultado['matricula'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            <p><strong>Marca:</strong> <?php echo htmlspecialchars($resultado['datos']['Auto']['marca'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            <p><strong>Modelo:</strong> <?php echo htmlspecialchars($resultado['datos']['Auto']['modelo'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            <p><strong>Tipo:</strong> <?php echo ucfirst(htmlspecialchars($resultado['datos']['Auto']['tipo'], ENT_QUOTES, 'UTF-8')); ?></p>
                         </div>
                         
                         <div class="seccion">
-                            <h3>👤 Datos del Propietario</h3>
-                            <p><strong>Nombre:</strong> <?php echo $resultado['datos']['Propietario']['nombre']; ?></p>
-                            <p><strong>Ciudad:</strong> <?php echo $resultado['datos']['Propietario']['ciudad']; ?></p>
-                            <p><strong>Dirección:</strong> <?php echo $resultado['datos']['Propietario']['direccion']; ?></p>
+                            <h3>Datos del Propietario</h3>
+                            <p><strong>Nombre:</strong> <?php echo htmlspecialchars($resultado['datos']['Propietario']['nombre'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            <p><strong>Ciudad:</strong> <?php echo htmlspecialchars($resultado['datos']['Propietario']['ciudad'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            <p><strong>Dirección:</strong> <?php echo htmlspecialchars($resultado['datos']['Propietario']['direccion'], ENT_QUOTES, 'UTF-8'); ?></p>
                         </div>
                     </div>
                 </div>
-            <?php endif; ?>
-            
+            <?php endif; ?>    
+        
         <?php else: ?>
             <!-- Resultado de consulta general -->
             <div class="resultado exito">
-                <h2>📋 Todos los Vehículos Registrados</h2>
+                <h2>&#128221; Todos los Vehículos Registrados</h2>
                 <p>Se muestran los <strong><?php echo count($parqueVehicular); ?> vehículos</strong> registrados en el parque vehicular.</p>
             </div>
             
             <div class="tabla-vehiculos">
                 <table>
-                    <tr>
-                        <th>Matrícula</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Tipo</th>
-                        <th>Propietario</th>
-                        <th>Ciudad</th>
-                        <th>Dirección</th>
-                    </tr>
-                    <?php foreach ($parqueVehicular as $matricula => $vehiculo): ?>
-                    <tr>
-                        <td><strong><?php echo $matricula; ?></strong></td>
-                        <td><?php echo $vehiculo['Auto']['marca']; ?></td>
-                        <td><?php echo $vehiculo['Auto']['modelo']; ?></td>
-                        <td><?php echo ucfirst($vehiculo['Auto']['tipo']); ?></td>
-                        <td><?php echo $vehiculo['Propietario']['nombre']; ?></td>
-                        <td><?php echo $vehiculo['Propietario']['ciudad']; ?></td>
-                        <td><?php echo $vehiculo['Propietario']['direccion']; ?></td>
-                    </tr>
-                    <?php endforeach; ?>
+                    <thead>
+                        <tr>
+                            <th>Matrícula</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Tipo</th>
+                            <th>Propietario</th>
+                            <th>Ciudad</th>
+                            <th>Dirección</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($parqueVehicular as $matricula => $vehiculo): ?>
+                        <tr>
+                            <td><strong><?php echo htmlspecialchars($matricula, ENT_QUOTES, 'UTF-8'); ?></strong></td>
+                            <td><?php echo htmlspecialchars($vehiculo['Auto']['marca'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($vehiculo['Auto']['modelo'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo ucfirst(htmlspecialchars($vehiculo['Auto']['tipo'], ENT_QUOTES, 'UTF-8')); ?></td>
+                            <td><?php echo htmlspecialchars($vehiculo['Propietario']['nombre'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($vehiculo['Propietario']['ciudad'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($vehiculo['Propietario']['direccion'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
                 </table>
             </div>
         <?php endif; ?>
@@ -196,19 +206,21 @@
             <h2>Estructura del Arreglo (print_r)</h2>
             <pre><?php 
             if ($tipoConsulta === 'por_matricula' && $resultado['encontrado']) {
-                // Mostrar solo el vehículo encontrado
-                echo htmlspecialchars(print_r([$resultado['matricula'] => $resultado['datos']], true));
+                echo htmlspecialchars(print_r([$resultado['matricula'] => $resultado['datos']], true), ENT_QUOTES, 'UTF-8');
             } else {
-                // Mostrar todos los vehículos
-                echo htmlspecialchars(print_r($parqueVehicular, true));
+                echo htmlspecialchars(print_r($parqueVehicular, true), ENT_QUOTES, 'UTF-8');
             }
             ?></pre>
         </div>
         
         <div class="botones">
             <a href="E6_formulario.html" class="btn btn-nuevo">Nueva Consulta</a>
-            <a href="..\index.php" class="btn btn-principal">Index</a>
-        </div>
-    </div>
+            <a href="../index.php" class="btn btn-principal">Index</a>
+        </div>    
+        
+         <p>
+            <a href="https://validator.w3.org/check?uri=referer"><img
+            src="https://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="36" width="93" /></a>
+        </p>
 </body>
 </html>

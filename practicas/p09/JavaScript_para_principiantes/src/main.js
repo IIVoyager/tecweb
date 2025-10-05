@@ -250,3 +250,93 @@ function contadorFor() {
         document.write(f + " ");
     }
 }
+
+// Ejemplo 14: Mensajes Repetidos
+function mensajesRepetidos() {
+    document.getElementById('resultadoMensajes').innerHTML = '';
+    document.write("Cuidado<br>");
+    document.write("Ingresa tu documento correctamente<br>");
+    document.write("Cuidado<br>");
+    document.write("Ingresa tu documento correctamente<br>");
+    document.write("Cuidado<br>");
+    document.write("Ingresa tu documento correctamente<br>");
+}
+
+// Ejemplo 15: Función con Mensajes
+function mostrarMensaje() {
+    document.write("Cuidado<br>");
+    document.write("Ingresa tu documento correctamente<br>");
+}
+
+function funcionMensajes() {
+    document.getElementById('resultadoFuncionMensajes').innerHTML = '';
+    mostrarMensaje();
+    mostrarMensaje();
+    mostrarMensaje();
+}
+
+// Ejemplo 16: Rango de Números
+function mostrarRango(x1, x2) {
+    var inicio;
+    for(inicio = x1; inicio <= x2; inicio++) {
+        document.write(inicio + ' ');
+    }
+}
+
+function rangoNumeros() {
+    var valor1, valor2;
+    
+    valor1 = prompt('Ingresa el valor inferior:', '');
+    valor1 = parseInt(valor1);
+    valor2 = prompt('Ingresa el valor superior:', '');
+    valor2 = parseInt(valor2);
+    
+    document.getElementById('resultadoRango').innerHTML = '';
+    mostrarRango(valor1, valor2);
+}
+
+// Ejemplo 17: Conversión a Castellano (If)
+function convertirCastellanoIf(x) {
+    if(x == 1)
+        return "uno";
+    else if(x == 2)
+        return "dos";
+    else if(x == 3)
+        return "tres";
+    else if(x == 4)
+        return "cuatro";
+    else if(x == 5)
+        return "cinco";
+    else
+        return "valor incorrecto";
+}
+
+function convertirCastellanoIf() {
+    var valor = prompt("Ingresa un valor entre 1 y 5", "");
+    valor = parseInt(valor);
+    var r = convertirCastellanoIf(valor);
+    
+    document.getElementById('resultadoCastellanoIf').innerHTML = '';
+    document.write(r);
+}
+
+// Ejemplo 18: Conversión a Castellano (Switch)
+function convertirCastellanoSwitch(x) {
+    switch (x) {
+        case 1: return "uno";
+        case 2: return "dos";
+        case 3: return "tres";
+        case 4: return "cuatro";
+        case 5: return "cinco";
+        default: return "valor incorrecto";
+    }
+}
+
+function convertirCastellanoSwitch() {
+    var valor = prompt("Ingresa un valor entre 1 y 5", "");
+    valor = parseInt(valor);
+    var r = convertirCastellanoSwitch(valor);
+    
+    document.getElementById('resultadoCastellanoSwitch').innerHTML = '';
+    document.write(r);
+}

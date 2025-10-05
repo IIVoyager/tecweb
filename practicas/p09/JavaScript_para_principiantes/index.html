@@ -270,7 +270,100 @@
     <h1>Ejemplo 13: Contador con For</h1>
     <div id="resultadoFor"></div>
     <button onclick="contadorFor()">Ejecutar Contador For</button>
-</body>
-</html>
+
+<!-- Ejemplo 14: Mensajes Repetidos 
+    <script type = “text/javascript”>
+        document.write(“Cuidado<br>”);
+        document.write(“Ingresa tu documento correctamente<br>”);
+        document.write(“Cuidado<br>”);
+        document.write(“Ingresa tu documento correctamente<br>”);
+        document.write(“Cuidado<br>”);
+        document.write(“Ingresa tu documento correctamente<br>”);
+    </script>
+-->
+    <h1>Ejemplo 14: Mensajes Repetidos sin Función</h1>
+    <div id="resultadoMensajes"></div>
+    <button onclick="mensajesRepetidos()">Ejecutar Mensajes Repetidos</button>
+
+<!-- Ejemplo 15: Mensajes Repetidos con Función 
+    <script type=“text/javascript”>
+        function mostrarMensaje() {
+            document.write(“Cuidado<br>”);
+            document.write(“Ingresa tu documento correctamente<br>”);
+        }
+        mostrarMensaje();
+        mostrarMensaje();
+        mostrarMensaje();
+    </script>
+-->
+    <h1>Ejemplo 15: Mensajes Repetidos con Función</h1>
+    <div id="resultadoFuncionMensajes"></div>
+    <button onclick="funcionMensajes()">Ejecutar Función Mensajes</button>
+
+<!-- Ejemplo 16: Rango de Números 
+    <script type = “text/javascript”>
+    function mostrarRango(x1,x2) {
+        var inicio;
+        for(inicio=x1; inicio<=x2; inicio++) {
+            document.write(inicio+‘ ’);
+        }
+    }
+    var valor1,valor2;
+    valor1 = prompt(‘Ingresa el valor inferior:’, ‘’);
+    valor1 = parseInt(valor1);
+    valor2 = prompt(‘Ingresa el valor superior:’, ‘’);
+    valor2 = parseInt(valor2);
+    mostrarRango(valor1,valor2);
+    </script>
+-->
+    <h1>Ejemplo 16: Rango de Números con Función</h1>
+    <div id="resultadoRango"></div>
+    <button onclick="rangoNumeros()">Ejecutar Rango de Números</button>
+
+<!-- Ejemplo 17: Conversión a Castellano (If) 
+    <script type="text/javascript">
+    function convertirCastellano(x) {
+        if(x==1)
+            return “uno”;
+        else
+            if(x==2)
+                return “dos”;
+            else
+                if(x==3)
+                    return “tres”;
+                else
+                    if(x==4)
+                        return “cuatro”;
+                    else
+                        if(x==5)
+                            return “cinco”;
+                        else
+                            return “valor incorrecto”;
+    }
+    var valor = prompt(“Ingresa un valor entre 1 y 5”, “”);
+    valor = parseInt(valor);
+    var r = convertirCastellano(valor);
+    document.write(r);
+    </script>
+-->
+    <h1>Ejemplo 17: Conversión a Castellano (If)</h1>
+    <div id="resultadoCastellanoIf"></div>
+    <button onclick="convertirCastellanoIf()">Ejecutar Conversión If</button>
+
+<!-- Ejemplo 18: Conversión a Castellano (Switch) 
+    function convertirCastellano(x) {
+        switch (x) {
+            case 1: return "uno";
+            case 2: return "dos";
+            case 3: return "tres";
+            case 4: return "cuatro";
+            case 5: return "cinco";
+            default: return "valor incorrecto";
+        }
+    }
+-->
+    <h1>Ejemplo 18: Conversión a Castellano (Switch)</h1>
+    <div id="resultadoCastellanoSwitch"></div>
+    <button onclick="convertirCastellanoSwitch()">Ejecutar Conversión Switch</button>
 </body>
 </html>

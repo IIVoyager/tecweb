@@ -28,3 +28,23 @@ function mostrarVariables() {
     document.write('<h3>Altura: '+altura+'</h3>');
     document.write('<h3>Casado: '+casado+'</h3>');
 }
+
+// Ejemplo 3: Solicitar datos al usuario
+function solicitarDatos() {
+    var nombre;
+    var edad;
+    
+    // Solicitar datos al usuario
+    nombre = prompt('Ingresa tu nombre:', '');
+    edad = prompt('Ingresa tu edad:', '');
+    
+    // Limpiar el contenido anterior
+    document.getElementById('resultadoSolicitarDatos').innerHTML = '';
+    
+    // Mostrar los datos usando document.write()
+    document.write('Hola ');
+    document.write(nombre);
+    document.write(' así que tienes ');
+    document.write(edad);
+    document.write(' años');
+}

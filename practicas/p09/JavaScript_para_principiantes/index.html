@@ -90,7 +90,7 @@
         document.write(producto);
     </script>
 -->
-    <h1>Ejemplo 4: Suma y Producto</h1>
+    <h1>Ejemplo 4: Suma y Producto con Estructura Secuencial</h1>
     <div id="resultadoSumaProducto"></div>
     <button onclick="sumaProducto()">Ejecutar Suma y Producto</button>
 
@@ -105,7 +105,7 @@
         }
     </script>
 -->
-    <h1>Ejemplo 5: Verificar Aprobación</h1>
+    <h1>Ejemplo 5: Verificar Aprobación con if</h1>
     <div id="resultadoAprobacion"></div>
     <button onclick="verificarAprobacion()">Ejecutar Verificar Aprobación</button>
 
@@ -124,7 +124,7 @@
         }
     </script>
 -->
-    <h1>Ejemplo 6: Número Mayor</h1>
+    <h1>Ejemplo 6: Número Mayor con if-else</h1>
     <div id="resultadoNumeroMayor"></div>
     <button onclick="numeroMayor()">Ejecutar Número Mayor</button>
 
@@ -153,7 +153,7 @@
         }
     </script>
 -->
-    <h1>Ejemplo 7: Promedio de Notas</h1>
+    <h1>Ejemplo 7: Promedio de Notas con if-else anidado</h1>
     <div id="resultadoPromedio"></div>
     <button onclick="promedioNotas()">Ejecutar Promedio de Notas</button>
 
@@ -198,9 +198,78 @@
         }
     </script>
 -->
-    <h1>Ejemplo 9: Cambiar Color de Fondo</h1>
+    <h1>Ejemplo 9: Cambiar Color de Fondo con Switch</h1>
     <div id="resultadoColor"></div>
     <button onclick="cambiarColor()">Ejecutar Cambiar Color</button>
+
+<!-- Ejemplo 10: Contador del 1 al 100 
+    <script type=“text/javascript”>
+        var x;
+        x=1;
+        while (x<=100) {
+            document.write(x);
+            document.write(‘<br>’);
+            x=x+1;
+        }
+    </script>
+-->
+    <h1>Ejemplo 10: Contador del 1 al 100 con While</h1>
+    <div id="resultadoContador"></div>
+    <button onclick="contador100()">Ejecutar Contador 100</button>
+
+<!-- Ejemplo 11: Suma de 5 Valores con acumulador
+    <script type=“text/javascript”>
+        var x=1;
+        var suma=0;
+        var valor;
+        while (x<=5){
+            valor = prompt(‘Ingresa el valor:’, ‘’);
+            valor = parseInt(valor);
+            suma = suma+valor;
+            x = x+1;
+        }
+        document.write(“La suma de los valores es ”+suma+“<br>”);
+    </script>
+-->
+    <h1>Ejemplo 11: Suma de 5 Valores con concepto de acumulador</h1>
+    <div id="resultadoSuma5"></div>
+    <button onclick="suma5Valores()">Ejecutar Suma 5 Valores</button>
+
+<!-- Ejemplo 12: Contador de Dígitos 
+    <script type = “text/javascript”>
+        var valor;
+        do{
+            valor = prompt(‘Ingresa un valor entre 0 y 999:’, ‘’);
+            valor = parseInt(valor);
+            document.write(‘El valor ’+valor+‘ tiene ’);
+            if (valor<10)
+                document.write(‘Tiene 1 dígitos’)
+            else
+                if (valor<100) {
+                    document.write(‘Tiene 2 dígitos’);
+                }
+                else {
+                    document.write(‘Tiene 3 dígitos’);
+                }
+            document write(‘<br>’);
+        }while(valor!=0);
+    </script>
+-->
+    <h1>Ejemplo 12: Contador de Dígitos con Do-While</h1>
+    <div id="resultadoDigitos"></div>
+    <button onclick="contadorDigitos()">Ejecutar Contador Dígitos</button>
+
+<!-- Ejemplo 13: Contador con For 
+    <script type=“text/javascript”>
+        var f;
+        for(f=1; f<=10; f++) {
+            document.write(f+“ ”);
+        }
+    </script>
+-->
+    <h1>Ejemplo 13: Contador con For</h1>
+    <div id="resultadoFor"></div>
+    <button onclick="contadorFor()">Ejecutar Contador For</button>
 </body>
 </html>
 </body>

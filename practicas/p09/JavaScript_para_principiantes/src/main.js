@@ -187,3 +187,66 @@ function cambiarColor() {
             document.write('Color no válido. Use rojo, verde o azul.');
     }
 }
+
+// Ejemplo 10: Contador del 1 al 100
+function contador100() {
+    var x;
+    x = 1;
+    
+    document.getElementById('resultadoContador').innerHTML = '';
+    
+    while (x <= 100) {
+        document.write(x);
+        document.write('<br>');
+        x = x + 1;
+    }
+}
+
+// Ejemplo 11: Suma de 5 Valores
+function suma5Valores() {
+    var x = 1;
+    var suma = 0;
+    var valor;
+    
+    while (x <= 5) {
+        valor = prompt('Ingresa el valor:', '');
+        valor = parseInt(valor);
+        suma = suma + valor;
+        x = x + 1;
+    }
+    
+    document.getElementById('resultadoSuma5').innerHTML = '';
+    document.write("La suma de los valores es " + suma + "<br>");
+}
+
+// Ejemplo 12: Contador de Dígitos
+function contadorDigitos() {
+    var valor;
+    
+    document.getElementById('resultadoDigitos').innerHTML = '';
+    
+    do {
+        valor = prompt('Ingresa un valor entre 0 y 999:', '');
+        valor = parseInt(valor);
+        document.write('El valor ' + valor + ' tiene ');
+        
+        if (valor < 10) {
+            document.write('Tiene 1 dígito');
+        } else if (valor < 100) {
+            document.write('Tiene 2 dígitos');
+        } else {
+            document.write('Tiene 3 dígitos');
+        }
+        
+        document.write('<br>');
+    } while(valor != 0);
+}
+
+// Ejemplo 13: Contador con For
+function contadorFor() {
+    var f;
+    document.getElementById('resultadoFor').innerHTML = '';
+    for(f = 1; f <= 10; f++) {
+        document.write(f + " ");
+    }
+}

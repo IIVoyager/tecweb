@@ -13,9 +13,43 @@
     <div id="edad"></div>
     <input id="clickMe" type="button" value="clickme" onclick="getDatos();"/>
 
-<!-- Ejemplo 1: Hola Mundo usando document.write() -->
+<!-- Ejemplo 1: Hola Mundo usando document.write()
+    <html>
+        <head></head>
+        <body>
+            <script type="text/javascript">
+                document.write('Hola Mundo');
+            </script>
+        </body>
+    </html>
+-->
     <h1>Ejemplo 1: Hola mundo usando document.write</h1>
     <div id="resultado1"></div>
     <button onclick="ejemplo1();">Ejecutar Ejemplo 1</button>
+
+<!-- Ejemplo 2: Mostrar Variables
+    <html>
+        <head></head>
+        <body>
+            <script type = "text/javascript">
+                var nombre = 'Juan';
+                var edad = 10;
+                var altura = 1.92;
+                var casado = false;
+                document.write( nombre );
+                document.write( '<br>' );
+                document.write( edad );
+                document.write( '<br>' );
+                document.write( altura );
+                document.write( '<br>' );
+                document.write( casado );
+            </script>
+        </body>
+    </html>
+-->
+    
+    <h1>Ejemplo 2: Mostrar Variables</h1>
+    <div id="resultadoVariables"></div>
+    <button onclick="mostrarVariables()">Ejecutar Mostrar Variables</button>
 </body>
 </html>

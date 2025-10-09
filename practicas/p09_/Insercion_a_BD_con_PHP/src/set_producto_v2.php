@@ -99,8 +99,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Si no hay errores, verificar duplicados en la base de datos
     if (empty($errores)) {
-        // Verificar si ya existe un producto con el mismo nombre, marca y modelo
-        $sql = "SELECT id FROM productos WHERE nombre = ? AND marca = ? AND modelo = ?";
+        // Verificar si ya existe un producto NO ELIMINADO con el mismo nombre, marca y modelo
+        $sql = "SELECT id FROM productos WHERE nombre = ? AND marca = ? AND modelo = ? AND eliminado = 0";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sss", $nombre, $marca, $modelo);
         $stmt->execute();
@@ -114,10 +114,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Si no hay errores, insertar en la base de datos
     if (empty($errores)) {
-        $sql = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        // Establecer valor por defecto para eliminado (0 = no eliminado)
+        $eliminado = 0;
+
+        // Query de inserción actualizada con el campo "eliminado"
+        $sql = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen, eliminado) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssddis", $nombre, $marca, $modelo, $precio, $detalles, $unidades, $imagen);
+        $stmt->bind_param("sssddisi", $nombre, $marca, $modelo, $precio, $detalles, $unidades, $imagen, $eliminado);
         
         if ($stmt->execute()) {
             $id_insertado = $stmt->insert_id;
@@ -186,6 +190,10 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
             text-align: center;
             margin-top: 20px;
         }
+        .status {
+            color: #4CAF50;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -216,6 +224,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
                 <p><strong>Detalles:</strong> <?php echo !empty($detalles) ? htmlspecialchars($detalles) : 'No especificado'; ?></p>
                 <p><strong>Unidades:</strong> <?php echo $unidades; ?></p>
                 <p><strong>Imagen:</strong> <?php echo !empty($imagen) ? htmlspecialchars($imagen) : 'No se subió imagen'; ?></p>
+                <p><strong>Estado:</strong> <span class="status">Disponible (No eliminado)</span></p>
             </div>
         <?php endif; ?>
         

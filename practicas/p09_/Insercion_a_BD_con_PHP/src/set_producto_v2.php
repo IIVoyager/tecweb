@@ -114,6 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Si no hay errores, insertar en la base de datos
     if (empty($errores)) {
+        /* ---- QUERY ORIGINAL COMENTADA ----
         // Establecer valor por defecto para eliminado (0 = no eliminado)
         $eliminado = 0;
 
@@ -122,6 +123,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sssddisi", $nombre, $marca, $modelo, $precio, $detalles, $unidades, $imagen, $eliminado);
+        
+        if ($stmt->execute()) {
+            $id_insertado = $stmt->insert_id;
+            $mensaje_exito = "Producto registrado exitosamente.";
+        } else {
+            $errores[] = "Error al insertar el producto: " . $stmt->error;
+        }
+        $stmt->close();
+        */
+
+        // QUERY USANDO COLUMN NAMES
+        // La columna 'id' se auto-incrementa automáticamente
+        // La columna 'eliminado' toma el valor por defecto (0) definido en la tabla
+        $sql = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssddis", $nombre, $marca, $modelo, $precio, $detalles, $unidades, $imagen);
         
         if ($stmt->execute()) {
             $id_insertado = $stmt->insert_id;

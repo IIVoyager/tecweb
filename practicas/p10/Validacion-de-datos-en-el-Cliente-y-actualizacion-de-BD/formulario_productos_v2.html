@@ -86,12 +86,35 @@
         .hidden {
             display: none;
         }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+        .current-image {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1 id="titulo-formulario">Registro de Productos</h1>
-        <form id="FormularioProductos" action="http://localhost/tecweb/practicas/p10/Validacion-de-datos-en-el-Cliente-y-actualizacion-de-BD/set_producto_v2.php" method="POST" enctype="multipart/form-data">
+        <form id="FormularioProductos" action="update_producto.php" method="POST" enctype="multipart/form-data">
             
             <!-- Campo oculto para el ID del producto (solo en modo modificación) -->
             <input type="hidden" id="producto_id" name="producto_id">
@@ -107,12 +130,13 @@
                 <label for="marca">Marca <span class="required">*</span></label>
                 <select id="marca" name="marca" required>
                     <option value="">Seleccione una marca</option>
+                    <option value="Acer">Acer</option>
+                    <option value="HP">HP</option>
+                    <option value="Dell">Dell</option>
+                    <option value="Logitech">Logitech</option>
+                    <option value="Sony">Sony</option>
                     <option value="Samsung">Samsung</option>
-                    <option value="Apple">Apple</option>
-                    <option value="Xiaomi">Xiaomi</option>
-                    <option value="Motorola">Motorola</option>
-                    <option value="Honor">Honor</option>
-                    <option value="Nokia">Nokia</option>
+                    <option value="Seagate">Seagate</option>
                 </select>
                 <div class="error" id="marca-error"></div>
             </div>
@@ -149,8 +173,11 @@
                 <div class="error" id="imagen-error"></div>
                 <!-- Mostrar imagen actual si estamos en modo modificación -->
                 <div id="imagen-actual" class="hidden">
-                    <p><strong>Imagen actual:</strong></p>
-                    <img id="imagen-preview" src="" width="170" height="120">
+                    <div class="current-image">
+                        <p><strong>Imagen actual:</strong></p>
+                        <img id="imagen-preview" src="" width="170" height="120" style="border: 1px solid #ddd; border-radius: 4px;">
+                        <p><small>Si selecciona una nueva imagen, esta reemplazará la imagen actual.</small></p>
+                    </div>
                 </div>
             </div>
             
@@ -298,9 +325,9 @@
             // g. Validar imagen (opcional, mover a directorio img/ o usar default)
             const imagen = imagenInput.files[0];
             if (imagen) {
-                const allowedTypes = ['image/jpeg', 'image/png'];
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
                 if (!allowedTypes.includes(imagen.type)) {
-                    document.getElementById('imagen-error').textContent = 'Solo se permiten imágenes JPG o PNG';
+                    document.getElementById('imagen-error').textContent = 'Solo se permiten imágenes JPG, PNG, GIF o WebP';
                     isValid = false;
                 }
                 
@@ -312,63 +339,9 @@
             
             if (!isValid) {
                 event.preventDefault();
-            } else {
-                // Si la validación es exitosa, procesar la imagen
-                processImage(event);
             }
+            // Si es válido, el formulario se enviará automáticamente a update_producto.php
         });
-        
-        // Función para procesar la imagen
-        function processImage(event) {
-            event.preventDefault();
-            
-            const imagen = imagenInput.files[0];
-            const formData = new FormData();
-            
-            // Agregar todos los datos del formulario
-            formData.append('nombre', nombreInput.value.trim());
-            formData.append('marca', marcaSelect.value);
-            formData.append('modelo', modeloInput.value.trim());
-            formData.append('precio', precioInput.value);
-            formData.append('detalles', detallesTextarea.value.trim());
-            formData.append('unidades', unidadesInput.value);
-            
-            // Si estamos en modo modificación, agregar el ID
-            if (productoIdInput.value) {
-                formData.append('id', productoIdInput.value);
-            }
-            
-            // Procesar la imagen
-            if (imagen) {
-                formData.append('ruta_imagen', 'img/' + imagen.name);
-            } else {
-                // Si no hay imagen, usar la ruta por defecto
-                formData.append('ruta_imagen', 'img/default.jpeg');
-            }
-            
-            // Construir mensaje único con todos los datos
-            let mensajeCompleto = '';
-
-            // Agregar todos los datos del formulario
-            mensajeCompleto += 'Datos a enviar:\n';
-            for (let [key, value] of formData.entries()) {
-                // Para el campo de imagen, mostrar solo el nombre del archivo
-                if (key === 'imagen') {
-                    mensajeCompleto += `• ${key}: ${value.name}\n`;
-                } else {
-                    mensajeCompleto += `• ${key}: ${value}\n`;
-                }
-            }
-            
-            // Agregar mensaje de éxito
-            mensajeCompleto += 'Formulario validado correctamente.';
-            
-            // Mostrar todos los datos en un único alert
-            alert(mensajeCompleto);
-            
-            // En un entorno real, aquí enviaríamos el formulario
-            // form.submit();
-        }
     </script>
 </body>
 </html>

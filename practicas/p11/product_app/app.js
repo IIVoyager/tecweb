@@ -60,6 +60,59 @@ function buscarID(e) {
     client.send("id="+id);
 }
 
+// FUNCIÓN PARA BÚSQUEDA VERSÁTIL DE PRODUCTOS 
+function buscarProducto(e) {
+    e.preventDefault();
+
+    var criterio = document.getElementById('search').value.trim();
+    if (criterio === "") {
+        alert("Por favor, escribe algo para buscar.");
+        return;
+    }
+
+    var client = getXMLHttpRequest();
+    client.open('POST', './backend/read.php', true);
+    client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    client.onreadystatechange = function () {
+        if (client.readyState == 4 && client.status == 200) {
+            console.log('[CLIENTE]\n' + client.responseText);
+
+            // CONVERTIR RESPUESTA A OBJETO JSON (array de productos)
+            let productos = JSON.parse(client.responseText);
+
+            // LIMPIAR TABLA
+            document.getElementById("productos").innerHTML = "";
+
+            // SI HAY RESULTADOS
+            if (productos.length > 0) {
+                let template = "";
+                productos.forEach(p => {
+                    let descripcion = `
+                        <li>precio: ${p.precio}</li>
+                        <li>unidades: ${p.unidades}</li>
+                        <li>modelo: ${p.modelo}</li>
+                        <li>marca: ${p.marca}</li>
+                        <li>detalles: ${p.detalles}</li>
+                    `;
+                    template += `
+                        <tr>
+                            <td>${p.id}</td>
+                            <td>${p.nombre}</td>
+                            <td><ul>${descripcion}</ul></td>
+                        </tr>
+                    `;
+                });
+                document.getElementById("productos").innerHTML = template;
+            } else {
+                document.getElementById("productos").innerHTML = `
+                    <tr><td colspan="3">No se encontraron productos.</td></tr>
+                `;
+            }
+        }
+    };
+    client.send("id=" + encodeURIComponent(criterio));
+}
+
 // FUNCIÓN CALLBACK DE BOTÓN "Agregar Producto"
 function agregarProducto(e) {
     e.preventDefault();

@@ -117,26 +117,76 @@ function buscarProducto(e) {
 function agregarProducto(e) {
     e.preventDefault();
 
-    // SE OBTIENE DESDE EL FORMULARIO EL JSON A ENVIAR
-    var productoJsonString = document.getElementById('description').value;
-    // SE CONVIERTE EL JSON DE STRING A OBJETO
-    var finalJSON = JSON.parse(productoJsonString);
-    // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
-    finalJSON['nombre'] = document.getElementById('name').value;
-    // SE OBTIENE EL STRING DEL JSON FINAL
-    productoJsonString = JSON.stringify(finalJSON,null,2);
+    // SE OBTIENE EL NOMBRE
+    const nombre = document.getElementById('name').value.trim();
+    if (nombre === '' || nombre.length > 100) {
+        alert('El nombre es requerido y debe tener 100 caracteres o menos.');
+        return;
+    }
+
+    // SE OBTIENE EL JSON DESDE EL FORMULARIO
+    let productoJsonString = document.getElementById('description').value;
+    let finalJSON;
+
+    try {
+        finalJSON = JSON.parse(productoJsonString);
+    } catch (error) {
+        alert('El JSON del producto no es válido.');
+        return;
+    }
+
+    // VALIDACIONES DE LOS CAMPOS DEL JSON
+    const { marca, modelo, precio, detalles, unidades, imagen } = finalJSON;
+
+    // b. Marca requerida (debe venir de una lista)
+    const marcasValidas = ['Acer', 'HP', 'Dell', 'Logitech', 'Sony', 'Samsung', 'Seagate', 'LG'];
+    if (!marca || !marcasValidas.includes(marca)) {
+        alert('La marca es requerida y debe seleccionarse de la lista: ' + marcasValidas.join(', '));
+        return;
+    }
+
+    // c. Modelo requerido, alfanumérico, <= 25 caracteres
+    const modeloRegex = /^[a-zA-Z0-9\-]+$/;
+    if (!modelo || !modeloRegex.test(modelo) || modelo.length > 25) {
+        alert('El modelo es requerido, alfanumérico y debe tener 25 caracteres o menos.');
+        return;
+    }
+
+    // d. Precio requerido y > 99.99
+    if (isNaN(precio) || precio <= 99.99) {
+        alert('El precio es requerido y debe ser mayor a 99.99.');
+        return;
+    }
+
+    // e. Detalles opcional pero <= 250 caracteres
+    if (detalles && detalles.length > 250) {
+        alert('Los detalles deben tener 250 caracteres o menos.');
+        return;
+    }
+
+    // f. Unidades requeridas >= 0
+    if (isNaN(unidades) || unidades < 0) {
+        alert('Las unidades deben ser un número mayor o igual a 0.');
+        return;
+    }
+
+    // g. Imagen opcional (si no existe, usar por defecto)
+    finalJSON.imagen = imagen && imagen.trim() !== '' ? imagen : 'img/default.jpg';
+
+    // SE AGREGA EL NOMBRE AL JSON FINAL
+    finalJSON.nombre = nombre;
 
     // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
     var client = getXMLHttpRequest();
     client.open('POST', './backend/create.php', true);
     client.setRequestHeader('Content-Type', "application/json;charset=UTF-8");
     client.onreadystatechange = function () {
-        // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
         if (client.readyState == 4 && client.status == 200) {
             console.log(client.responseText);
+            alert(client.responseText); // Mostrar respuesta del servidor
         }
     };
-    client.send(productoJsonString);
+    client.send(JSON.stringify(finalJSON));
 }
 
 // SE CREA EL OBJETO DE CONEXIÓN COMPATIBLE CON EL NAVEGADOR

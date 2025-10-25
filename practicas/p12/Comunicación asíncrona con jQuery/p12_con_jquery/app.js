@@ -8,6 +8,8 @@ var baseJSON = {
     "imagen": "img/default.png"
 };
 
+var productoEditando = null; // Variable para almacenar el ID del producto en edición
+
 function init() {
     /**
      * Convierte el JSON a string para poder mostrarlo
@@ -27,11 +29,139 @@ function init() {
         $('#search').on('input', buscarProductoRealTime);
         
         // Agregar producto al enviar formulario
-        $('#product-form').on('submit', agregarProducto);
+        $('#product-form').on('submit', manejarFormularioProducto);
         
         // Eliminar producto (event delegation para elementos dinámicos)
         $('#products').on('click', '.product-delete', eliminarProducto);
+
+        // Editar producto (event delegation para elementos dinámicos)
+        $('#products').on('click', '.product-edit', editarProducto);
+        
+        // Cancelar edición
+        $('#cancelar-edicion').on('click', cancelarEdicion);
     });
+}
+
+// FUNCIÓN PARA MANEJAR EL FORMULARIO (AGREGAR O EDITAR)
+function manejarFormularioProducto(e) {
+    e.preventDefault();
+    
+    if (productoEditando) {
+        guardarProductoEditado();
+    } else {
+        agregarProducto();
+    }
+}
+
+// FUNCIÓN PARA CANCELAR EDICIÓN
+function cancelarEdicion() {
+    productoEditando = null;
+    $('#name').val('');
+    $('#description').val(JSON.stringify(baseJSON,null,2));
+    $('#product-form button[type="submit"]').text('Agregar Producto');
+    $('#cancelar-edicion').addClass('d-none');
+    mostrarEstado('info', 'Edición finalizada');
+}
+
+// FUNCIÓN PARA EDITAR PRODUCTO
+function editarProducto() {
+    var id = $(this).closest('tr').attr('productId');
+    var fila = $(this).closest('tr');
+    
+    // Obtener datos del producto de la fila
+    var nombre = fila.find('td:eq(1)').text();
+    
+    // Obtener los detalles del producto de la lista
+    var detalles = {};
+    fila.find('ul li').each(function() {
+        var texto = $(this).text();
+        if (texto.includes('precio:')) {
+            detalles.precio = parseFloat(texto.replace('precio:', '').trim());
+        } else if (texto.includes('unidades:')) {
+            detalles.unidades = parseInt(texto.replace('unidades:', '').trim());
+        } else if (texto.includes('modelo:')) {
+            detalles.modelo = texto.replace('modelo:', '').trim();
+        } else if (texto.includes('marca:')) {
+            detalles.marca = texto.replace('marca:', '').trim();
+        } else if (texto.includes('detalles:')) {
+            detalles.detalles = texto.replace('detalles:', '').trim();
+        }
+    });
+    
+    // Asignar imagen por defecto si no existe
+    if (!detalles.imagen) {
+        detalles.imagen = "img/default.png";
+    }
+    
+    // Llenar el formulario con los datos del producto
+    $('#name').val(nombre);
+    $('#description').val(JSON.stringify(detalles, null, 2));
+    
+    // Cambiar el texto del botón
+    $('#product-form button[type="submit"]').text('Guardar Cambios');
+    
+    // Mostrar botón de cancelar
+    $('#cancelar-edicion').removeClass('d-none');
+    
+    // Guardar el ID del producto que se está editando
+    productoEditando = id;
+    
+    mostrarEstado('info', 'Editando producto: ' + nombre);
+}
+
+// FUNCIÓN PARA GUARDAR PRODUCTO EDITADO
+function guardarProductoEditado() {
+    // SE OBTIENE DESDE EL FORMULARIO EL JSON A ENVIAR
+    var productoJsonString = $('#description').val();
+    
+    try {
+        // SE CONVIERTE EL JSON DE STRING A OBJETO
+        var finalJSON = JSON.parse(productoJsonString);
+        // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
+        finalJSON['nombre'] = $('#name').val();
+        // SE AGREGA EL ID DEL PRODUCTO
+        finalJSON['id'] = productoEditando;
+        
+        // VALIDACIONES BÁSICAS
+        if (!finalJSON.nombre || finalJSON.nombre.trim() === '') {
+            mostrarEstado('error', 'El nombre del producto es requerido');
+            return;
+        }
+
+        // SE OBTIENE EL STRING DEL JSON FINAL
+        productoJsonString = JSON.stringify(finalJSON,null,2);
+
+        $.ajax({
+            url: './backend/product-edit.php',
+            type: 'POST',
+            data: productoJsonString,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function(respuesta) {
+                let template_bar = '';
+                template_bar += `
+                    <li style="list-style: none;">status: ${respuesta.status}</li>
+                    <li style="list-style: none;">message: ${respuesta.message}</li>
+                `;
+
+                $('#product-result').removeClass('d-none');
+                $('#container').html(template_bar);
+
+                if (respuesta.status === 'success') {
+                    // LIMPIAR FORMULARIO Y RESTAURAR ESTADO
+                    cancelarEdicion();
+                    // SE LISTAN TODOS LOS PRODUCTOS
+                    listarProductos();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al editar producto:', error);
+                mostrarEstado('error', 'Error al editar producto');
+            }
+        });
+    } catch (error) {
+        mostrarEstado('error', 'JSON inválido: ' + error.message);
+    }
 }
 
 // FUNCIÓN PARA LISTAR TODOS LOS PRODUCTOS
@@ -58,7 +188,10 @@ function listarProductos() {
                             <td>${producto.nombre}</td>
                             <td><ul>${descripcion}</ul></td>
                             <td>
-                                <button class="product-delete btn btn-danger">
+                                <button style="width: 100px; height: 30px; font-size: 14px;" class="product-edit btn btn-warning mr-2">
+                                    Editar
+                                </button>
+                                <button style="width: 100px; height: 30px; font-size: 14px;" class="product-delete btn btn-danger" withd="100px" length="80px">
                                     Eliminar
                                 </button>
                             </td>
@@ -158,10 +291,8 @@ function buscarProductos(search) {
     });
 }
 
-// FUNCIÓN PARA AGREGAR PRODUCTO
-function agregarProducto(e) {
-    e.preventDefault();
-
+// FUNCIÓN PARA AGREGAR PRODUCTO (sin cambios, solo se renombra el manejador)
+function agregarProducto() {
     // SE OBTIENE DESDE EL FORMULARIO EL JSON A ENVIAR
     var productoJsonString = $('#description').val();
     

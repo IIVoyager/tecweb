@@ -1,0 +1,24 @@
+{
+    "name": "tecweb/productapp",
+    "description": "Aplicación de gestión de productos",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Angel David Carrillo Pascual",
+            "email": "angel.carrillopas@alumno.buap.mx"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tecweb\\MyApi\\": "backend/src/Tecweb/MyApi/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
